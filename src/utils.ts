@@ -7,6 +7,25 @@ export * from './types'
 export const adaptGroup = (data: Kook.Guild): Universal.Guild => ({
   id: data.id,
   name: data.name,
+  avatar: data.icon
+})
+
+export const adaptChannel = (data: Kook.Channel): Universal.Channel => ({
+  id: data.id,
+  type: (() => {
+    switch (data.type) {
+      case 1:
+        return Universal.Channel.Type.TEXT
+      case 2:
+        return Universal.Channel.Type.VOICE
+      case 0:
+        return Universal.Channel.Type.CATEGORY
+      default:
+        return -1 as Universal.Channel.Type // not supported
+    }
+  })(),
+  name: data.name,
+  parentId: data.parent_id
 })
 
 export const adaptUser = (user: Kook.User): Universal.User => ({
