@@ -1,5 +1,5 @@
 {
-  "name": "@satorijs/adapter-kook",
+  "name": "@paotuan/adapter-kook",
   "description": "KOOK (开黑啦) Adapter for Satorijs",
   "version": "4.5.1",
   "main": "lib/index.js",
@@ -28,8 +28,16 @@
     "im",
     "chat"
   ],
+  "scripts": {
+    "build:js": "esbuild src/index.ts --outfile=lib/index.js --bundle --sourcemap --sources-content=false --platform=node --external:@satorijs/satori --external:./node_modules/* --target=es2022",
+    "build:tsc": "tsc",
+    "build": "yarn run build:js && yarn run build:tsc"
+  },
   "devDependencies": {
-    "@cordisjs/server": "^0.1.8"
+    "@cordisjs/server": "^0.1.8",
+    "@types/node": "^20.11.24",
+    "esbuild": "^0.20.1",
+    "typescript": "^5.3.3"
   },
   "peerDependencies": {
     "@satorijs/satori": "^3.6.3"
